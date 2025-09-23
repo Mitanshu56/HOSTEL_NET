@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HostelManagement.Models.FoodMenu>
+
+@{
+    ViewBag.Title = "Food Menu Management";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-utensils"></i> Food Menu Management</h2>
+                <div>
+                    @Html.ActionLink("Weekly View", "WeeklyMenu", null, new { @class = "btn btn-success me-2" })
+                    @Html.ActionLink("Add New Menu", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+                    @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Meal Type</th>
+                                    <th>Menu Items</th>
+                                    <th>Description</th>
+                                    <th>Last Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var menu in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-primary">@menu.DayOfWeek</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-@menu.MealColor">
+                                                <i class="@menu.MealIcon"></i> @menu.MealType
+                                            </span>
+                                        </td>
+                                        <td>@menu.MenuItems</td>
+                                        <td>@(menu.Description ?? "No description")</td>
+                                        <td>@menu.UpdatedDate.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                @Html.ActionLink("View", "Details", new { id = menu.Id }, new { @class = "btn btn-sm btn-info" })
+                                                @Html.ActionLink("Edit", "Edit", new { id = menu.Id }, new { @class = "btn btn-sm btn-warning" })
+                                                @Html.ActionLink("Delete", "Delete", new { id = menu.Id }, new { @class = "btn btn-sm btn-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No menu items found</h4>
+                    <p class="text-muted">Start by adding your first menu item.</p>
+                    @Html.ActionLink("Add First Menu", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

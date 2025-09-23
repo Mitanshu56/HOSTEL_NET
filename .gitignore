@@ -1,0 +1,79 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Bb]uild/
+[Bb]ld/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Tt]est[Rr]esults*/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+# Keep a referenced packages folder if using package restore
+!packages/*/build/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ReSharper/JetBrains Rider
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+
+# IIS/Publish/Web
+[Ll]ogs/
+App_Data/*.mdf
+App_Data/*.ldf
+App_Data/*.log
+*.publishsettings
+*.pubxml
+*.pubxml.user
+PublishProfiles/
+
+# Database files
+*.mdf
+*.ldf
+
+# Others
+*.cache
+*.pdb
+*.dbmdl
+*.jfm
+~$*
+*.tmp
+*.bak
+*.orig
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Rider caches
+/.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini

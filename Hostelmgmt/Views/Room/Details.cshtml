@@ -1,0 +1,76 @@
+﻿@model HostelManagement.Models.Room
+
+@{
+    ViewBag.Title = "Room Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header @(Model.HasVacancy ? "bg-success" : "bg-warning") text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3><i class="fas fa-door-open"></i> Room @Model.RoomNumber Details</h3>
+                        <span class="badge @(Model.HasVacancy ? "bg-light text-success" : "bg-light text-warning")">
+                            @Model.AvailabilityStatus
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Room Number:</label>
+                                <p class="form-control-plaintext">@Model.RoomNumber</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Room Type:</label>
+                                <p class="form-control-plaintext">
+                                    <span class="badge bg-primary">@Model.RoomType</span>
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Sharing Type:</label>
+                                <p class="form-control-plaintext">
+                                    <span class="badge bg-info">@Model.SharingDisplay</span>
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">AC Type:</label>
+                                <p class="form-control-plaintext">
+                                    <span class="badge @(Model.ACType == "AC" ? "bg-info" : "bg-secondary")">@Model.ACType</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Monthly Rent:</label>
+                                <p class="form-control-plaintext text-success fw-bold fs-4">₹@Model.RentAmount.ToString("N0")</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Floor Number:</label>
+                                <p class="form-control-plaintext">@(Model.FloorNumber?.ToString() ?? "Not specified")</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Maximum Occupancy:</label>
+                                <p class="form-control-plaintext">@Model.MaxOccupancy students</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Current Occupancy:</label>
+                                <p class="form-control-plaintext">@Model.CurrentOccupancy students</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Occupancy Status:</label>
+                        @{
+                            var occupancyPercentage = (Model.CurrentOccupancy * 100.0 / Model.MaxOccupancy);
+                        }
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar @(Model.CurrentOccupancy == Model.MaxOccupancy ? "bg-danger" : "bg-success") progress-bar-striped"
+                                 style="width: @(occupancyPercentage)%">
+                                @Model.CurrentOccupancy / @Model.MaxOccupancy
+                            </div>
+                        </div>
+                        <small class="text-muted

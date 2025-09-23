@@ -1,0 +1,91 @@
+﻿@model IEnumerable<HostelManagement.Models.Student>
+
+@{
+    ViewBag.Title = "Students List";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-users"></i> Hostel Students</h2>
+                @Html.ActionLink("Add New Student", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+                    @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show">
+                    @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Room Details</th>
+                                    <th>Date Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var student in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@student.Name</strong>
+                                        </td>
+                                        <td>@student.Email</td>
+                                        <td>@student.Phone</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(student.RoomDetails))
+                                            {
+                                                <span class="badge bg-success">@student.RoomDetails</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning">No Room Assigned</span>
+                                            }
+                                        </td>
+                                        <td>@student.DateOfJoining.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                @Html.ActionLink("View", "Details", new { id = student.Id }, new { @class = "btn btn-sm btn-info" })
+                                                @Html.ActionLink("Edit", "Edit", new { id = student.Id }, new { @class = "btn btn-sm btn-warning" })
+                                                @Html.ActionLink("Remove", "Delete", new { id = student.Id }, new { @class = "btn btn-sm btn-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-user-plus fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No students found</h4>
+                    <p class="text-muted">Start by adding your first student to the hostel.</p>
+                    @Html.ActionLink("Add First Student", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

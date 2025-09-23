@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Hostel Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        .progress {
+            background-color: #e9ecef;
+        }
+
+        .btn-group .btn {
+            margin-right: 2px;
+        }
+
+        .alert {
+            border: none;
+            border-radius: 0.375rem;
+        }
+
+        .table th {
+            border-top: none;
+        }
+
+        .badge {
+            font-size: 0.75em;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        /* Dashboard card hover effects */
+        .card-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            }
+        /* Make entire card clickable */
+        a.text-decoration-none .card {
+            cursor: pointer;
+        }
+
+        a.text-decoration-none:hover .card {
+            text-decoration: none;
+        }
+        /* Card footer link styling */
+        .card-footer a {
+            font-weight: 500;
+        }
+        /* Ensure cards have equal height */
+        .h-100 {
+            height: 100% !important;
+        }
+        /* Food menu specific styles */
+        .meal-item {
+            border-left: 3px solid #dee2e6;
+            padding-left: 10px;
+        }
+
+            .meal-item h6.text-warning {
+                border-left-color: #ffc107;
+            }
+
+            .meal-item h6.text-success {
+                border-left-color: #198754;
+            }
+
+            .meal-item h6.text-info {
+                border-left-color: #0dcaf0;
+            }
+        /* Navigation active state */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            color: #fff !important;
+        }
+        /* Footer styles */
+        footer {
+            margin-top: auto;
+        }
+        /* Custom spacing */
+        .mt-6 {
+            margin-top: 4rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 4rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            @Html.ActionLink("🏨 Hostel Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Students", "Index", "Student", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Rooms", "Index", "Room", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Food Menu", "WeeklyMenu", "FoodMenu", null, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-plus"></i> Quick Add
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <h6 class="dropdown-header">
+                                    <i class="fas fa-user-plus"></i> Students
+                                </h6>
+                            </li>
+                            <li>@Html.ActionLink("Add New Student", "Create", "Student", null, new { @class = "dropdown-item" })</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <h6 class="dropdown-header">
+                                    <i class="fas fa-bed"></i> Rooms
+                                </h6>
+                            </li>
+                            <li>@Html.ActionLink("Add New Room", "Create", "Room", null, new { @class = "dropdown-item" })</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <h6 class="dropdown-header">
+                                    <i class="fas fa-utensils"></i> Food Menu
+                                </h6>
+                            </li>
+                            <li>@Html.ActionLink("Add Menu Item", "Create", "FoodMenu", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("View Weekly Menu", "WeeklyMenu", "FoodMenu", null, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-chart-bar"></i> Reports
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="reportsDropdown">
+                            <li>@Html.ActionLink("All Students", "Index", "Student", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("All Rooms", "Index", "Room", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Weekly Menu", "WeeklyMenu", "FoodMenu", null, new { @class = "dropdown-item" })</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>@Html.ActionLink("Room Occupancy", "Index", "Room", null, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-question-circle"></i> Help
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="helpDropdown">
+                            <li>@Html.ActionLink("About System", "About", "Home", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Contact Support", "Contact", "Home", null, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    </li>
+
+                    @if (Session["Username"] != null)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "nav-link btn btn-outline-light ms-2" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link btn btn-outline-light ms-2" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-4">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-home"></i> Hostel Management</h5>
+                    <p class="mb-0">Efficient hostel operations management system</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li>@Html.ActionLink("Students", "Index", "Student", null, new { @class = "text-white-50" })</li>
+                        <li>@Html.ActionLink("Rooms", "Index", "Room", null, new { @class = "text-white-50" })</li>
+                        <li>@Html.ActionLink("Food Menu", "WeeklyMenu", "FoodMenu", null, new { @class = "text-white-50" })</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Contact Info</h6>
+                    <p class="mb-0">
+                        <i class="fas fa-envelope"></i> support@hostelmgmt.com<br>
+                        <i class="fas fa-phone"></i> +91 9876543210
+                    </p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="row">
+                <div class="col-12">
+                    <p class="mb-0">
+                        &copy; @DateTime.Now.Year Hostel Management System. All rights reserved. |
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "text-white-50" }) |
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "text-white-50" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript for active navigation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get current controller and action from URL
+            var path = window.location.pathname.toLowerCase();
+            var navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+            navLinks.forEach(function (link) {
+                var href = link.getAttribute('href');
+                if (href && path.includes(href.toLowerCase().split('/')[1])) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Auto-dismiss alerts after 5 seconds
+            setTimeout(function () {
+                var alerts = document.querySelectorAll('.alert-dismissible');
+                alerts.forEach(function (alert) {
+                    var bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                });
+            }, 5000);
+
+            // Add loading spinner to form submissions
+            var forms = document.querySelectorAll('form');
+            forms.forEach(function (form) {
+                form.addEventListener('submit', function () {
+                    var submitBtn = form.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                        submitBtn.disabled = true;
+                    }
+                });
+            });
+        });
+
+        // Confirmation for delete actions
+        function confirmDelete(itemName) {
+            return confirm('Are you sure you want to delete this ' + itemName + '? This action cannot be undone.');
+        }
+
+        // Add confirmation to delete links
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteLinks = document.querySelectorAll('a[href*="/Delete/"]');
+            deleteLinks.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    if (!confirmDelete('item')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HostelManagement.Models.FoodMenu>
+
+@{
+    ViewBag.Title = ViewBag.SelectedDay + " Menu";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-calendar-day"></i> @ViewBag.SelectedDay Menu</h2>
+                <div>
+                    @Html.ActionLink("Back to Weekly Menu", "WeeklyMenu", null, new { @class = "btn btn-secondary me-2" })
+                    @Html.ActionLink("Add Menu Item", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div class="row">
+                @if (Model.Any())
+                {
+                    foreach (var menu in Model)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-@menu.MealColor">
+                                <div class="card-header bg-@menu.MealColor text-white">
+                                    <h5 class="mb-0">
+                                        <i class="@menu.MealIcon"></i> @menu.MealType
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">Menu Items:</h6>
+                                    <p class="card-text">@menu.MenuItems</p>
+
+                                    @if (!string.IsNullOrEmpty(menu.Description))
+                                    {
+                                        <h6 class="card-title">Description:</h6>
+                                        <p class="card-text text-muted">@menu.Description</p>
+                                    }
+
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock"></i> Last updated: @menu.UpdatedDate.ToString("MMM dd, yyyy")
+                                    </small>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-group w-100" role="group">
+                                        @Html.ActionLink("View", "Details", new { id = menu.Id }, new { @class = "btn btn-sm btn-info" })
+                                        @Html.ActionLink("Edit", "Edit", new { id = menu.Id }, new { @class = "btn btn-sm btn-warning" })
+                                        @Html.ActionLink("Delete", "Delete", new { id = menu.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                            <h4 class="text-muted">No menu items for @ViewBag.SelectedDay</h4>
+                            <p class="text-muted">Add breakfast, lunch, and dinner items for this day.</p>
+                            @Html.ActionLink("Add Menu Item", "Create", null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

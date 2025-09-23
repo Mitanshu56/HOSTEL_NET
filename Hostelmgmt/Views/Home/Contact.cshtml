@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">
+                        Get in touch with our support team for any questions or assistance regarding the Hostel Management System.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4><i class="fas fa-headset"></i> Support</h4>
+                            <div class="contact-info">
+                                <p>
+                                    <i class="fas fa-phone text-primary"></i>
+                                    <strong>Phone:</strong> +91 9876543210
+                                </p>
+                                <p>
+                                    <i class="fas fa-envelope text-info"></i>
+                                    <strong>Email:</strong> support@hostelmgmt.com
+                                </p>
+                                <p>
+                                    <i class="fas fa-clock text-warning"></i>
+                                    <strong>Hours:</strong> 9:00 AM - 6:00 PM (Mon-Fri)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4><i class="fas fa-map-marker-alt"></i> Address</h4>
+                            <div class="contact-info">
+                                <p>
+                                    <i class="fas fa-building text-success"></i>
+                                    <strong>Office:</strong><br>
+                                    Hostel Management Solutions<br>
+                                    123 Tech Park, Software City<br>
+                                    Bangalore, Karnataka - 560001<br>
+                                    India
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h4><i class="fas fa-question-circle"></i> Frequently Asked Questions</h4>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                    How do I add a new student?
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Navigate to the Students section and click "Add New Student". Fill in the required information
+                                    and select an available room if needed.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                    How do I manage room assignments?
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Go to the Rooms section to view all rooms. You can create new rooms, edit existing ones,
+                                    and track occupancy. Students can be assigned rooms during registration or editing.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                    What sharing options are available?
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The system supports 1, 2, 3, and 4 sharing options. Each room type can be configured
+                                    as AC or Non-AC with different rent amounts.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-primary mt-4">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Need Help?</strong> Contact our support team for personalized assistance with your hostel management needs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

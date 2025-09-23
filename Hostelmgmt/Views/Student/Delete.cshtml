@@ -1,0 +1,64 @@
+﻿@model HostelManagement.Models.Student
+
+@{
+    ViewBag.Title = "Remove Student";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Remove Student</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-danger"><strong>Are you sure you want to remove this student from the hostel?</strong></p>
+
+                    <div class="student-details bg-light p-3 rounded">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><strong>Name:</strong> @Model.Name</p>
+                                <p><strong>Email:</strong> @Model.Email</p>
+                                <p><strong>Phone:</strong> @(Model.Phone ?? "Not provided")</p>
+                                <p>
+                                    <strong>Current Room:</strong>
+                                    @if (!string.IsNullOrEmpty(Model.RoomDetails))
+                                    {
+                                        <span class="badge bg-info">@Model.RoomDetails</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">No room assigned</span>
+                                    }
+                                </p>
+                                <p><strong>Date Joined:</strong> @Model.DateOfJoining.ToString("MMMM dd, yyyy")</p>
+                                @if (!string.IsNullOrEmpty(Model.Address))
+                                {
+                                    <p><strong>Address:</strong> @Model.Address</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note:</strong> This will mark the student as inactive and free up their room slot if assigned.
+                    </div>
+
+                    @using (Html.BeginForm("Delete", "Student", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary me-md-2" })
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-user-times"></i> Remove Student
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
